@@ -1,0 +1,160 @@
+\documentclass[a4paper, fleqn, draft]{report}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[left=2.5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage[english,russian]{babel}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+\author{Itegulov D. S.}
+\title{Category Theory course by Shtukenberg}
+\date{Fall 2016 --- Winter 2017}
+
+\newtheorem*{defn}{Определение} 
+\newtheorem*{thm}{Теорема} 
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\chapter{Теория катерогий}
+\section{Ввведение}
+\subsection{Категория}
+Баззворды: семантика Скотта, $D_{\inf}$
+\begin{defn}
+Категория $\mathcal{C}$ -- это:
+\begin{enumerate}
+\item Объекты: $(a, b, \ldots)$
+\item Для каждой пары объектов заданы морфизмы (стрелки):
+  $(f \colon a \to b,\ g \colon b \to c, \ldots)$
+\item Для пары морфизмов $f \colon a \to b$ и $g \colon b \to c$
+      определена композиция: $g \circ f\colon a \to c$ \\
+      Композиция ассоциативна $f \circ (g \circ h) = (f \circ g) \circ h$
+\item Должна существовать единица (для каждого объекта): \\
+      $f \circ 1_a = f$ и $1_a \circ g = g$ (Закон тождества)
+\end{enumerate}
+\end{defn}
+\tikzset{
+    labl/.style={anchor=south, rotate=90, inner sep=.5mm}
+}
+\tikzset{
+    labrd/.style={anchor=south, rotate=-45}
+}
+\tikzset{
+    labru/.style={anchor=south, rotate=45}
+}
+\tikzset{
+    labr/.style={anchor=north, rotate=-90, inner sep=.5mm}
+}
+
+\begin{figure}
+  \centering
+  \begin{tikzcd}[column sep=1in, row sep=1in]
+    a \arrow[r, "f"] \arrow[dr, "g\circ f" labrd, pos=0.3, crossing over]
+      \arrow[d, xshift=4pt, "(h \circ g) \circ f" labl, outer sep=8pt]
+      \arrow[d, xshift=-4pt, "h \circ (g \circ f)" labl, outer sep=-9pt]
+  & b \arrow [d, "g"]
+      \arrow [ld, "h\circ g" labru, pos=0.3, swap]
+    \\
+    d
+  & c \arrow [ l , swap , " h " ]
+  \end{tikzcd}
+
+  \caption{Коммутативная диаграмма какой-то категории}
+  \label{fig:cd1}
+\end{figure}
+Примеры:
+\begin{enumerate}
+  \item $Set$ -- катерогия множеств \\
+        Объекты в ней -- множества \\
+        Морфизмы -- отображения
+  \item Категория $1$ -- $1_a\colon a \to a$ (нарисовать петлю) 
+  \item Категория $2$ -- две петли и $f\colon a \to b$
+  \item Предпорядок -- возьмём рефлексивность + транзитивность, тогда это категория
+                       в которой между $a$ и $b$ есть не более одной стрелки
+  \item Моноид $M = \langle A, *, e \rangle$ \\
+        $a * b \Rightarrow a \circ b$ \\
+        $e \Rightarrow 1_e$
+\end{enumerate}
+
+
+
+\begin{thm}
+  Для каждого объекта $x$ существует единственное $1_x$
+\end{thm}
+\begin{proof}
+  Предположим есть две таких единицы $1_x$ и $I_x$: \\
+  Тогда $1_x \circ I_x = 1_x$ и также $1_x \circ I_x = I_x$ \\
+  По единственности композиции $1_x = I_x$
+\end{proof}
+
+\subsection{Дискретная категория}
+\begin{defn}
+Дискретная категория -- такая категория, в которой единственные морфизмы --
+единичные стрелки.
+\end{defn}
+\begin{defn}
+Подкатегория -- $\mathcal{C} \subset \mathcal{D}$, если все $\mathcal{C}$-объекты это $\mathcal{D}$-объекты и все
+$\mathcal{C}$-морфизмы это $\mathcal{D}$-морфизмы.
+\end{defn}
+\begin{defn}
+Подкатегория называется полной, если для любых таких $\mathcal{C}$-объектов $a, b$, в $\mathcal{D}$ нет
+дополнительных морфизмов между $a$ и $b$: $f\colon a \to b$.
+\end{defn}
+\begin{defn}
+Проивзедение категорий $\mathcal{C} \times \mathcal{D}$ -- объектами являются пары $\langle a, b \rangle$,
+а морфизмы получаются из морфизмов $f\colon a \to c$, $g\colon b \to d$ следующим образом:
+$\langle f, g \rangle\colon \langle a, b \rangle \to \langle c,d \rangle$
+\end{defn}
+
+\subsection{Категория стрелок}
+$\mathcal{C}$ -- категория. Тогда посторим $\overrightarrow{\mathcal{C}}$: \\
+$f\colon a \to b$ \\
+$g\colon a \to b$ \\
+
+Объекты $\overrightarrow{\mathcal{C}}$ -- $\langle h, k \rangle$ \\
+$1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
+
+*Рисунок из трёх стрелок, показывающий композицию* \\
+
+$f: a \rightarrowtail b$ - мономорфная стрелка \\
+Если для любых g, h *квадратик <h f f g, a b c d>* влечёт $g = h$, то стрелка
+мономорфна \\
+
+Возьмём категорию $Set$: $f(g(x)) = f(h(x))$ влечёт $g(x)=h(x)$ | $f$ инъективно
+\begin{proof}
+  $\Rightarrow$) Предположим $f$ не инъективно тогда найдутся такие $(u, v)$, что $f(u) = f(v)
+  \Rightarrow g(x) = u h(x) = v проивторечат$ \\
+  $\Leftarrow$) Пусть для $x: g(x) != h(x)$ $f(g(x)) != f(h(x))$
+\end{proof}
+
+Эпиморфные стрелки \\
+$g \circ f = h \circ f$ влечёт $g = h$ \\
+Обозначается как $f\colon a \twoheadrightarrow g$ \\
+Аналог: Сюръективные функции
+
+Изоморфная стрелка \\
+$f\colon a \to b$ -- изоморфная стрелка, если найдётся $g\colon b \to a$, что
+$g \circ f = 1_a$ и $f \circ g = 1_b$ \\
+Обозначается как $f\colon a \rightsquigarrow b$ \\
+Утверждение. $g$ единственно
+\begin{proof}
+  $g' = 1_a \circ g' = (g \circ f) \circ g' = g \circ (f \circ g') = g \circ 1_b = g$
+\end{proof}
+
+Пример категории в которой эпиморфность и мономорфность не влечёт изоморфность:
+$\mathbb{N}$ \\
+Упражнение: \\
+\begin{enumerate}
+  \item $f$ -- изострелка, то она эпистрелка и монострелка \\
+  \item $1_x$ -- изострелка \\
+  \item $f^{-1}$ -- изострелка \\
+  \item $f$ и $g$ -- изострелки, то $f \circ g$ -- изострелка, причём
+        $(f \circ g)^{-1} = g^{-1} \circ f^{-1}$ \\
+\end{enumerate}
+\end{document}

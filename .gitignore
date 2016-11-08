@@ -1,0 +1,10 @@
+*.log
+*.aux
+*.synctex.gz
+*.pdf
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+auto/
+/_region_.tex
