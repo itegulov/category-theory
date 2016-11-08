@@ -4,3 +4,6 @@ Category Theory
 ===============
 
 Some notes about the category theory course will be here. The compiled PDF should be available under the Releases tab. Feel free to collaborate!
+
+# Disclaimer
+Смысла это не имеет © Дмитрий Григорьевич Штукенберг
