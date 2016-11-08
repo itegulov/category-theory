@@ -22,9 +22,14 @@ build:
           rubber --pdf -Wall main.tex
 deploy:
     steps:
+        - script:
+            name: generate release tag
+            code: |
+              export RELEASE_TAG=$(date +%F-%R | sed 's/-//g; s/://g')
+              echo $RELEASE_TAG
         - github-create-release:
             token: $GH_TOKEN
-            tag: 228
+            tag: $RELEASE_TAG
             title: Test release
             prerelease: true
         - github-upload-asset:
