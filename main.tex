@@ -8,6 +8,8 @@
 \usepackage{xcolor}
 \usepackage[english,russian]{babel}
 \usepackage{mathtools}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{tikz-cd}
 \usetikzlibrary{babel}
 
@@ -18,28 +20,8 @@
 \newtheorem*{defn}{Определение} 
 \newtheorem*{thm}{Теорема} 
 \newtheorem*{stmt}{Утверждение}
+\newtheorem*{rem}{Замечание}
 
-\begin{document}
-\maketitle
-\tableofcontents
-\newpage
-\chapter{Теория катерогий}
-\section{Ввведение}
-\subsection{Категория}
-Баззворды: семантика Скотта, $D_{\inf}$
-\begin{defn}
-Категория $\mathcal{C}$ -- это:
-\begin{enumerate}
-\item Объекты: $(a, b, \ldots)$
-\item Для каждой пары объектов заданы морфизмы (стрелки):
-  $(f \colon a \to b,\ g \colon b \to c, \ldots)$
-\item Для пары морфизмов $f \colon a \to b$ и $g \colon b \to c$
-      определена композиция: $g \circ f\colon a \to c$ \\
-      Композиция ассоциативна $f \circ (g \circ h) = (f \circ g) \circ h$
-\item Должна существовать единица (для каждого объекта): \\
-      $f \circ 1_a = f$ и $1_a \circ g = g$ (Закон тождества)
-\end{enumerate}
-\end{defn}
 \tikzset{
     labl/.style={anchor=south, rotate=90, inner sep=.5mm}
 }
@@ -52,6 +34,35 @@
 \tikzset{
     labr/.style={anchor=north, rotate=-90, inner sep=.5mm}
 }
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\chapter{Теория катерогий}
+\section{Ввведение}
+\subsection{Категория}
+Баззворды: семантика Скотта, $D_{\inf}$
+\begin{defn}
+  Категорией называется такое
+  $\mathcal{C} = \langle \mathcal{O}, hom, 1, \circ \rangle$, что:
+  \begin{enumerate}
+  \item Есть множество объектов $\mathcal{O}$: $(a, b, \ldots)$
+  \item Для каждой пары объектов $(a, b)$ из $\mathcal{C}$, существует множество
+    $hom(a, b)$, элементы которого называются морфизмами (стрелками) из $a$ в $b$:
+    $(f \colon a \to b,\ g \colon b \to c, \ldots)$
+  \item Для каждого объекта $a$ из $\mathcal{C}$ существует морфизм
+    $1_a \colon a \to a$
+  \item Для пары морфизмов $f \colon a \to b$ и $g \colon b \to c$
+    определен морфизм $g \circ f \colon a \to c$, называемый композицией $f$ и $g$
+  \end{enumerate}
+  А также удовлетворяющее следующим аксиомам:
+  \begin{itemize}
+  \item Композиция ассоциативна, т.е. $f \circ (g \circ h) = (f \circ g) \circ h$
+  \item Для любых морфизмов $f \colon a \to b, g \colon b \to c$ выполняется
+    $f \circ 1_a = f$ и $1_a \circ g = g$ (Также называется законом тождества)
+  \end{itemize}
+\end{defn}
 
 \begin{figure}
   \centering
@@ -71,46 +82,89 @@
 \end{figure}
 Примеры:
 \begin{enumerate}
-  \item $Set$ -- катерогия множеств \\
-        Объекты в ней -- множества \\
-        Морфизмы -- отображения
-  \item Категория $1$ -- $1_a\colon a \to a$ (нарисовать петлю) 
-  \item Категория $2$ -- две петли и $f\colon a \to b$
-  \item Предпорядок -- возьмём рефлексивность + транзитивность, тогда это категория
-                       в которой между $a$ и $b$ есть не более одной стрелки
-  \item Моноид $M = \langle A, *, e \rangle$ \\
-        $a * b \Rightarrow a \circ b$ \\
-        $e \Rightarrow 1_e$
+  \item $Set$ -- это катерогия множеств \\
+    Объекты в ней -- все множества \\
+    Морфизмы -- отображения \\
+    $1_a$ -- тождественное отображение \\
+    $\circ$ -- обычная композиция отображений
+  \item Категория $1$ \\
+    $1_a\colon a \to a$ (нарисовать петлю)
+  \item Категория $2$ \\
+    две петли и $f\colon a \to b$
+  \item Категория предпорядка \\
+    Если есть множество объектов $\mathcal{O}$ и операция $\leq$ на них,
+    обладающая свойствами рефлексивности и транзитивности, тогда это категория,
+    объектами которой являются $\mathcal{O}$, стрелка между $a$ и $b$
+    добавляется тогда и только тогда, когда $a \leq b$. Закон тождества
+    выполняется в силу рефлексивности $\leq$, а ассоциативность $\circ$ в силу
+    транзитивности $\leq$.
+  \item Категория моноид \\
+    Пусть есть моноид $M = \langle A, *, e \rangle$. Тогда в качестве
+    единственного объекта возьмём $A$ ($\mathcal{O} = \{ A \}$),
+    стрелками будут все элементы $A$ ($hom(A, A) = A$), $1_A = e$, а композиция
+    стрелок будет эквивалентна $a * b$.
 \end{enumerate}
 
-
+\begin{figure}
+\centering
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \begin{tikzcd}
+    a \arrow[loop]
+  \end{tikzcd}
+  \caption{Категория 1}
+  \label{fig:category-1}
+\end{subfigure}%
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \begin{tikzcd}[column sep=1in]
+    a \arrow[r, "f"] \arrow[loop]
+  & b \arrow[loop]
+  \end{tikzcd}
+  \caption{Категория 2}
+  \label{fig:category-2}
+\end{subfigure}
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \begin{tikzcd}[column sep=1in]
+    A \arrow[loop left, "e"] \arrow[loop above, "a"] \arrow[loop right, "b"]
+    \arrow[loop below, "a * b"]
+  \end{tikzcd}
+  \caption{Категория моноид}
+  \label{fig:category-2}
+\end{subfigure}
+\caption{Примеры категорий}
+\label{fig:category-example}
+\end{figure}
 
 \begin{thm}
-  Для каждого объекта $x$ существует единственное $1_x$
+  В категории $\mathcal{C}$ для каждого объекта $x$ существует единственное $1_x$
 \end{thm}
 \begin{proof}
-  Предположим есть две таких единицы $1_x$ и $I_x$: \\
-  Тогда $1_x \circ I_x = 1_x$ и также $1_x \circ I_x = I_x$ \\
-  По единственности композиции $1_x = I_x$
+  Предположим есть две таких единицы $1_x$ и $I_x$.
+  Тогда $1_x \circ I_x = 1_x$ (по первой половине закона тождества)
+  и также $1_x \circ I_x = I_x$ (по второй половине закона тождества).
+  Тогда по единственности композиции $1_x = I_x$
 \end{proof}
 
-\subsection{Дискретная категория}
 \begin{defn}
-Дискретная категория -- такая категория, в которой единственные морфизмы --
-единичные стрелки.
+  Дискретная категория -- такая категория, в которой единственные морфизмы --
+  единичные стрелки.
 \end{defn}
 \begin{defn}
-Подкатегория -- $\mathcal{C} \subset \mathcal{D}$, если все $\mathcal{C}$-объекты это $\mathcal{D}$-объекты и все
-$\mathcal{C}$-морфизмы это $\mathcal{D}$-морфизмы.
+  Подкатегория -- $\mathcal{C} \subset \mathcal{D}$, если все
+  $\mathcal{C}$-объекты это $\mathcal{D}$-объекты и все $\mathcal{C}$-морфизмы
+  это $\mathcal{D}$-морфизмы.
 \end{defn}
 \begin{defn}
-Подкатегория называется полной, если для любых таких $\mathcal{C}$-объектов $a, b$, в $\mathcal{D}$ нет
-дополнительных морфизмов между $a$ и $b$: $f\colon a \to b$.
+  Подкатегория называется полной, если для любых таких $\mathcal{C}$-объектов
+  $a, b$, в $\mathcal{D}$ нет дополнительных морфизмов между $a$ и $b$.
 \end{defn}
 \begin{defn}
-Произведение категорий $\mathcal{C} \times \mathcal{D}$ -- объектами являются пары $\langle a, b \rangle$,
-а морфизмы получаются из морфизмов $f\colon a \to c$, $g\colon b \to d$ следующим образом:
-$\langle f, g \rangle\colon \langle a, b \rangle \to \langle c,d \rangle$
+  Произведение категорий -- $\mathcal{C} \times \mathcal{D}$, если объектами
+  являются пары $\langle a, b \rangle$, а морфизмы получаются из морфизмов
+  $f\colon a \to c$, $g\colon b \to d$ следующим образом:
+  $\langle f, g \rangle\colon \langle a, b \rangle \to \langle c,d \rangle$
 \end{defn}
 
 \subsection{Категория стрелок}
