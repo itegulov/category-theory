@@ -25,12 +25,11 @@ deploy:
         - script:
             name: generate release tag
             code: |
-              export RELEASE_TAG=$(date +%F-%R | sed 's/-//g; s/://g')
-              echo $RELEASE_TAG
+              export RELEASE_TAG=$(date +%Y%m%d%H%M)
         - github-create-release:
             token: $GH_TOKEN
             tag: $RELEASE_TAG
-            title: Test release
+            title: WIP
             prerelease: true
         - github-upload-asset:
             token: $GH_TOKEN
