@@ -26,7 +26,7 @@ deploy:
             token: $GH_TOKEN
             tag: test_release
             title: Test release
-            draft: true
+            prerelease: true
         - github-upload-asset:
             token: $GH_TOKEN
             file: main.pdf
