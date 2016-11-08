@@ -182,16 +182,47 @@ $1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
 \begin{task}
   Пусть $f$ -- изоморфизм, тогда $f$ -- эпиморфизм и мономорфизм
 \end{task}
+\begin{proof}
+  Докажем, что $f$ -- эпиморфизм. Мономорфизм доказывается аналогично.
+  \begin{gather*}
+    g_1 \circ f = g_2 \circ f \Rightarrow
+    (g_1 \circ f) \circ f^{-1} = (g_2 \circ f) \circ f^{-1} \Rightarrow
+    g_1 \circ (f \circ f^{-1}) = g_2 \circ (f \circ f^{-1}) \Rightarrow \\
+    \Rightarrow g_1 \circ 1_b = g_2 \circ 1_b \Rightarrow
+    g_1 = g_2
+  \end{gather*}
+\end{proof}
 
 \begin{task}
   $1_x$ -- изоморфизм
 \end{task}
+\begin{proof}
+  Докажем, что $I_x$ (переименованная $1_x$) удовлетворяет свойствам обратного к $1_x$:
+  $I_x \circ 1_x = 1_x$, $1_x \circ I_x = 1_x$
+\end{proof}
 
 \begin{task}
   Пусть $f$ -- изоморфизм, тогда $f^{-1}$ -- изоморфизм
 \end{task}
+\begin{proof}
+  Есть $g = f^{-1}$ из определения изоморфизма. Тогда для $g$ есть $f$, которое
+  удовлетворяет свойствам из определения изоморфизма: $f \circ g = 1_b$ и
+  $g \circ f = 1_a$
+\end{proof}
 
 \begin{task}
-  Пусть $f$ и $g$ -- изоморфизмы, тогда $f \circ g$ -- изоморфизм, причём
-  $(f \circ g)^{-1} = g^{-1} \circ f^{-1}$
+  Пусть $f \colon a \to b$ и $g \colon b \to c$ -- изоморфизмы, тогда $g \circ f$ -- изоморфизм, причём
+  $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$
 \end{task}
+\begin{proof}
+  Докажем, что $f^{-1} \circ g^{-1}$ удовлетворяет свойствам обратного к
+  $g \circ f$:
+  \begin{gather*}
+    (f^{-1} \circ g^{-1}) \circ (g \circ f) =
+    ((f^{-1} \circ g^{-1}) \circ g) \circ f =
+    (f^{-1} \circ (g^{-1} \circ g)) \circ f =
+    (f^{-1} \circ 1_b) \circ f =
+    f^{-1} \circ f = 1_a
+  \end{gather*}
+  Второе свойство доказывается аналогично
+\end{proof}
