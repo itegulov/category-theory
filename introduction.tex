@@ -1,5 +1,5 @@
 \section{Ввведение}
-\subsection{Категория}
+\subsection{Основные определения и свойства}
 \begin{defn}
   Категорией называется такое
   $\mathcal{C} = \langle \mathcal{O}, hom, 1, \circ \rangle$, что:
@@ -126,7 +126,7 @@
   $\langle f, g \rangle\colon \langle a, b \rangle \to \langle c,d \rangle$
 \end{defn}
 
-\subsection{Категория стрелок}
+% Отсюда начинается какое-то невнятное гавно
 $\mathcal{C}$ -- категория. Тогда посторим $\overrightarrow{\mathcal{C}}$: \\
 $f\colon a \to b$ \\
 $g\colon a \to b$ \\
@@ -135,41 +135,63 @@ $g\colon a \to b$ \\
 $1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
 
 *Рисунок из трёх стрелок, показывающий композицию* \\
+% Здесь невнятное гавно заканчивается
 
-$f\colon a \rightarrowtail b$ - мономорфная стрелка \\
-Если для любых $g, h$ *квадратик <h f f g, a b c d>* влечёт $g = h$, то стрелка
-мономорфна \\
+\begin{defn}
+  Морфизм $f \colon a \to b$ называется мономорфизмом, если для любых морфизмов
+  $g_1 \colon c \to a, g_2 \colon c \to a$, таких что $f \circ g_1 = f \circ g_2$
+  следует $g_1 = g_2$.
+\end{defn}
 
-Возьмём категорию $Set$: $f(g(x)) = f(h(x))$ влечёт $g(x)=h(x)$ | $f$ инъективно
+\begin{thm}
+  Возьмём категорию $Set$: $f(g(x)) = f(h(x))$ влечёт $g(x)=h(x)$ | $f$ инъективно
+\end{thm}
 \begin{proof}
   $\Rightarrow$) Предположим $f$ не инъективно тогда найдутся такие $(u, v)$, что $f(u) = f(v)
   \Rightarrow g(x) = u h(x) = v противоречат$ \\
   $\Leftarrow$) Пусть для $x: g(x) \ne h(x)$ $f(g(x)) \ne f(h(x))$
 \end{proof}
 
-Эпиморфные стрелки \\
-$g \circ f = h \circ f$ влечёт $g = h$ \\
-Обозначается как $f\colon a \twoheadrightarrow g$ \\
-Аналог: Сюръективные функции
+\begin{defn}
+  Морфизм $f \colon a \to b$ называется эпиморфизмом, если для любых морфизмов
+  $g_1 \colon b \to c, g_2 \colon b \to c$, таких что $g_1 \circ f = g_2 \circ f$
+  следует $g_1 = g_2$
+\end{defn}
 
-Изоморфная стрелка \\
-$f\colon a \to b$ -- изоморфная стрелка, если найдётся $g\colon b \to a$, что
-$g \circ f = 1_a$ и $f \circ g = 1_b$ \\
-Обозначается как $f\colon a \rightsquigarrow b$ \\
+\begin{defn}
+  Морфизм $f \colon a \to b$ называется изоморфизмом, если найдётся
+  $g \colon b \to a$, такая что $g \circ f = 1_a$ и $f \circ g = 1_b$.
+  Изоморфная стрелка обозначается следующим образом:
+  $f \colon a \rightsquigarrow b$
+\end{defn}
+
 \begin{stmt}
-  $g$ единственно
+  $g$ из определения изоморфизма $f$ единственно
 \end{stmt}
 \begin{proof}
+  Пусть существуют два таких морфизма $g$ и $g'$ из определения изоморфизма. Тогда:
   $g' = 1_a \circ g' = (g \circ f) \circ g' = g \circ (f \circ g') = g \circ 1_b = g$
 \end{proof}
 
-Пример категории в которой эпиморфность и мономорфность не влечёт изоморфность:
-$\mathbb{N}$ \\
-Упражнение: \\
-\begin{enumerate}
-  \item $f$ -- изострелка, то она эпистрелка и монострелка \\
-  \item $1_x$ -- изострелка \\
-  \item $f^{-1}$ -- изострелка \\
-  \item $f$ и $g$ -- изострелки, то $f \circ g$ -- изострелка, причём
-        $(f \circ g)^{-1} = g^{-1} \circ f^{-1}$ \\
-\end{enumerate}
+Эквивалентна ли изоморфность и эпиморфность с мономорфностью?
+\begin{exm}
+  Не эквивалентны. $\mathbb{N}$ -- пример категории (как моноид по $+$) с
+  эпиморфными и мономорфными стрелками, но не с изоморфными стрелками.
+\end{exm}
+
+\begin{task}
+  Пусть $f$ -- изоморфизм, тогда $f$ -- эпиморфизм и мономорфизм
+\end{task}
+
+\begin{task}
+  $1_x$ -- изоморфизм
+\end{task}
+
+\begin{task}
+  Пусть $f$ -- изоморфизм, тогда $f^{-1}$ -- изоморфизм
+\end{task}
+
+\begin{task}
+  Пусть $f$ и $g$ -- изоморфизмы, тогда $f \circ g$ -- изоморфизм, причём
+  $(f \circ g)^{-1} = g^{-1} \circ f^{-1}$
+\end{task}
