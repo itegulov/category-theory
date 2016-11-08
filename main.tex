@@ -17,6 +17,7 @@
 
 \newtheorem*{defn}{Определение} 
 \newtheorem*{thm}{Теорема} 
+\newtheorem*{stmt}{Утверждение}
 
 \begin{document}
 \maketitle
@@ -59,7 +60,7 @@
       \arrow[d, xshift=4pt, "(h \circ g) \circ f" labl, outer sep=8pt]
       \arrow[d, xshift=-4pt, "h \circ (g \circ f)" labl, outer sep=-9pt]
   & b \arrow [d, "g"]
-      \arrow [ld, "h\circ g" labru, pos=0.3, swap]
+      \arrow [ld, "h\circ g" labru, pos=0.3, swap, crossing over]
     \\
     d
   & c \arrow [ l , swap , " h " ]
@@ -107,7 +108,7 @@ $\mathcal{C}$-морфизмы это $\mathcal{D}$-морфизмы.
 дополнительных морфизмов между $a$ и $b$: $f\colon a \to b$.
 \end{defn}
 \begin{defn}
-Проивзедение категорий $\mathcal{C} \times \mathcal{D}$ -- объектами являются пары $\langle a, b \rangle$,
+Произведение категорий $\mathcal{C} \times \mathcal{D}$ -- объектами являются пары $\langle a, b \rangle$,
 а морфизмы получаются из морфизмов $f\colon a \to c$, $g\colon b \to d$ следующим образом:
 $\langle f, g \rangle\colon \langle a, b \rangle \to \langle c,d \rangle$
 \end{defn}
@@ -122,15 +123,15 @@ $1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
 
 *Рисунок из трёх стрелок, показывающий композицию* \\
 
-$f: a \rightarrowtail b$ - мономорфная стрелка \\
-Если для любых g, h *квадратик <h f f g, a b c d>* влечёт $g = h$, то стрелка
+$f\colon a \rightarrowtail b$ - мономорфная стрелка \\
+Если для любых $g, h$ *квадратик <h f f g, a b c d>* влечёт $g = h$, то стрелка
 мономорфна \\
 
 Возьмём категорию $Set$: $f(g(x)) = f(h(x))$ влечёт $g(x)=h(x)$ | $f$ инъективно
 \begin{proof}
   $\Rightarrow$) Предположим $f$ не инъективно тогда найдутся такие $(u, v)$, что $f(u) = f(v)
-  \Rightarrow g(x) = u h(x) = v проивторечат$ \\
-  $\Leftarrow$) Пусть для $x: g(x) != h(x)$ $f(g(x)) != f(h(x))$
+  \Rightarrow g(x) = u h(x) = v противоречат$ \\
+  $\Leftarrow$) Пусть для $x: g(x) \ne h(x)$ $f(g(x)) \ne f(h(x))$
 \end{proof}
 
 Эпиморфные стрелки \\
@@ -142,7 +143,9 @@ $g \circ f = h \circ f$ влечёт $g = h$ \\
 $f\colon a \to b$ -- изоморфная стрелка, если найдётся $g\colon b \to a$, что
 $g \circ f = 1_a$ и $f \circ g = 1_b$ \\
 Обозначается как $f\colon a \rightsquigarrow b$ \\
-Утверждение. $g$ единственно
+\begin{stmt}
+  $g$ единственно
+\end{stmt}
 \begin{proof}
   $g' = 1_a \circ g' = (g \circ f) \circ g' = g \circ (f \circ g') = g \circ 1_b = g$
 \end{proof}
