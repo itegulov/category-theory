@@ -24,7 +24,7 @@ deploy:
     steps:
         - github-create-release:
             token: $GH_TOKEN
-            tag: $(date +%F-%R)
+            tag: 228
             title: Test release
             prerelease: true
         - github-upload-asset:
