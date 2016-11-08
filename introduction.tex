@@ -1,0 +1,175 @@
+\section{Ввведение}
+\subsection{Категория}
+\begin{defn}
+  Категорией называется такое
+  $\mathcal{C} = \langle \mathcal{O}, hom, 1, \circ \rangle$, что:
+  \begin{enumerate}
+  \item Есть множество объектов $\mathcal{O}$: $(a, b, \ldots)$
+  \item Для каждой пары объектов $(a, b)$ из $\mathcal{C}$, существует множество
+    $hom(a, b)$, элементы которого называются морфизмами (стрелками) из $a$ в $b$:
+    $(f \colon a \to b,\ g \colon b \to c, \ldots)$
+  \item Для каждого объекта $a$ из $\mathcal{C}$ существует морфизм
+    $1_a \colon a \to a$
+  \item Для пары морфизмов $f \colon a \to b$ и $g \colon b \to c$
+    определен морфизм $g \circ f \colon a \to c$, называемый композицией $f$ и $g$
+  \end{enumerate}
+  А также удовлетворяющее следующим аксиомам:
+  \begin{itemize}
+  \item Композиция ассоциативна, т.е. $f \circ (g \circ h) = (f \circ g) \circ h$
+  \item Для любых морфизмов $f \colon a \to b, g \colon b \to c$ выполняется
+    $f \circ 1_a = f$ и $1_a \circ g = g$ (Также называется законом тождества)
+  \end{itemize}
+\end{defn}
+
+\begin{figure}[b]
+  \centering
+  \begin{tikzcd}[column sep=1in, row sep=1in]
+    a \arrow[r, "f"] \arrow[dr, "g\circ f" labrd, pos=0.3, crossing over]
+      \arrow[d, xshift=4pt, "(h \circ g) \circ f" labl, outer sep=8pt]
+      \arrow[d, xshift=-4pt, "h \circ (g \circ f)" labl, outer sep=-9pt]
+  & b \arrow [d, "g"]
+      \arrow [ld, "h\circ g" labru, pos=0.3, swap, crossing over]
+    \\
+    d
+  & c \arrow [ l , swap , " h " ]
+  \end{tikzcd}
+
+  \caption{Коммутативная диаграмма какой-то категории}
+  \label{fig:cd1}
+\end{figure}
+\begin{exm}
+  Несколько простых примеров категорий:
+  \begin{enumerate}
+    \item $Set$ -- это катерогия множеств \\
+      Объекты в ней -- все множества \\
+      Морфизмы -- отображения \\
+      $1_a$ -- тождественное отображение \\
+      $\circ$ -- обычная композиция отображений
+    \item Категория $1$ \\
+      $1_a\colon a \to a$ (нарисовать петлю)
+    \item Категория $2$ \\
+      две петли и $f\colon a \to b$
+    \item Категория предпорядка \\
+      Если есть множество объектов $\mathcal{O}$ и операция $\leq$ на них,
+      обладающая свойствами рефлексивности и транзитивности, тогда это категория,
+      объектами которой являются $\mathcal{O}$, стрелка между $a$ и $b$
+      добавляется тогда и только тогда, когда $a \leq b$. Закон тождества
+      выполняется в силу рефлексивности $\leq$, а ассоциативность $\circ$ в силу
+      транзитивности $\leq$.
+    \item Категория моноид \\
+      Пусть есть моноид $M = \langle A, *, e \rangle$. Тогда в качестве
+      единственного объекта возьмём $A$ ($\mathcal{O} = \{ A \}$),
+      стрелками будут все элементы $A$ ($hom(A, A) = A$), $1_A = e$, а композиция
+      стрелок будет эквивалентна $a * b$.
+  \end{enumerate}
+\end{exm}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \begin{tikzcd}
+    a \arrow[loop]
+  \end{tikzcd}
+  \caption{Категория 1}
+  \label{fig:category-1}
+\end{subfigure}%
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \begin{tikzcd}[column sep=1in]
+    a \arrow[r, "f"] \arrow[loop]
+  & b \arrow[loop]
+  \end{tikzcd}
+  \caption{Категория 2}
+  \label{fig:category-2}
+\end{subfigure}
+\begin{subfigure}{.33\textwidth}
+  \centering
+  \begin{tikzcd}[column sep=1in]
+    A \arrow[loop left, "e"] \arrow[loop above, "a"] \arrow[loop right, "b"]
+    \arrow[loop below, "a * b"]
+  \end{tikzcd}
+  \caption{Категория моноид}
+  \label{fig:category-2}
+\end{subfigure}
+\caption{Примеры категорий}
+\label{fig:category-example}
+\end{figure}
+
+\begin{thm}
+  В категории $\mathcal{C}$ для каждого объекта $x$ существует единственное $1_x$
+\end{thm}
+\begin{proof}
+  Предположим есть две таких единицы $1_x$ и $I_x$.
+  Тогда $1_x \circ I_x = 1_x$ (по первой половине закона тождества)
+  и также $1_x \circ I_x = I_x$ (по второй половине закона тождества).
+  Тогда по единственности композиции $1_x = I_x$
+\end{proof}
+
+\begin{defn}
+  Дискретная категория -- такая категория, в которой единственные морфизмы --
+  единичные стрелки.
+\end{defn}
+\begin{defn}
+  Подкатегория -- $\mathcal{C} \subset \mathcal{D}$, если все
+  $\mathcal{C}$-объекты это $\mathcal{D}$-объекты и все $\mathcal{C}$-морфизмы
+  это $\mathcal{D}$-морфизмы.
+\end{defn}
+\begin{defn}
+  Подкатегория называется полной, если для любых таких $\mathcal{C}$-объектов
+  $a, b$, в $\mathcal{D}$ нет дополнительных морфизмов между $a$ и $b$.
+\end{defn}
+\begin{defn}
+  Произведение категорий -- $\mathcal{C} \times \mathcal{D}$, если объектами
+  являются пары $\langle a, b \rangle$, а морфизмы получаются из морфизмов
+  $f\colon a \to c$, $g\colon b \to d$ следующим образом:
+  $\langle f, g \rangle\colon \langle a, b \rangle \to \langle c,d \rangle$
+\end{defn}
+
+\subsection{Категория стрелок}
+$\mathcal{C}$ -- категория. Тогда посторим $\overrightarrow{\mathcal{C}}$: \\
+$f\colon a \to b$ \\
+$g\colon a \to b$ \\
+
+Объекты $\overrightarrow{\mathcal{C}}$ -- $\langle h, k \rangle$ \\
+$1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
+
+*Рисунок из трёх стрелок, показывающий композицию* \\
+
+$f\colon a \rightarrowtail b$ - мономорфная стрелка \\
+Если для любых $g, h$ *квадратик <h f f g, a b c d>* влечёт $g = h$, то стрелка
+мономорфна \\
+
+Возьмём категорию $Set$: $f(g(x)) = f(h(x))$ влечёт $g(x)=h(x)$ | $f$ инъективно
+\begin{proof}
+  $\Rightarrow$) Предположим $f$ не инъективно тогда найдутся такие $(u, v)$, что $f(u) = f(v)
+  \Rightarrow g(x) = u h(x) = v противоречат$ \\
+  $\Leftarrow$) Пусть для $x: g(x) \ne h(x)$ $f(g(x)) \ne f(h(x))$
+\end{proof}
+
+Эпиморфные стрелки \\
+$g \circ f = h \circ f$ влечёт $g = h$ \\
+Обозначается как $f\colon a \twoheadrightarrow g$ \\
+Аналог: Сюръективные функции
+
+Изоморфная стрелка \\
+$f\colon a \to b$ -- изоморфная стрелка, если найдётся $g\colon b \to a$, что
+$g \circ f = 1_a$ и $f \circ g = 1_b$ \\
+Обозначается как $f\colon a \rightsquigarrow b$ \\
+\begin{stmt}
+  $g$ единственно
+\end{stmt}
+\begin{proof}
+  $g' = 1_a \circ g' = (g \circ f) \circ g' = g \circ (f \circ g') = g \circ 1_b = g$
+\end{proof}
+
+Пример категории в которой эпиморфность и мономорфность не влечёт изоморфность:
+$\mathbb{N}$ \\
+Упражнение: \\
+\begin{enumerate}
+  \item $f$ -- изострелка, то она эпистрелка и монострелка \\
+  \item $1_x$ -- изострелка \\
+  \item $f^{-1}$ -- изострелка \\
+  \item $f$ и $g$ -- изострелки, то $f \circ g$ -- изострелка, причём
+        $(f \circ g)^{-1} = g^{-1} \circ f^{-1}$ \\
+\end{enumerate}
