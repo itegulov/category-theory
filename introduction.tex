@@ -90,7 +90,7 @@
     \arrow[loop below, "a * b"]
   \end{tikzcd}
   \caption{Категория моноид}
-  \label{fig:category-2}
+  \label{fig:category-monoid}
 \end{subfigure}
 \caption{Примеры категорий}
 \label{fig:category-example}
@@ -127,14 +127,14 @@
 \end{defn}
 
 % Отсюда начинается какое-то невнятное гавно
-$\mathcal{C}$ -- категория. Тогда посторим $\overrightarrow{\mathcal{C}}$: \\
-$f\colon a \to b$ \\
-$g\colon a \to b$ \\
+%$\mathcal{C}$ -- категория. Тогда посторим $\overrightarrow{\mathcal{C}}$: \\
+%$f\colon a \to b$ \\
+%$g\colon a \to b$ \\
 
-Объекты $\overrightarrow{\mathcal{C}}$ -- $\langle h, k \rangle$ \\
-$1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
+%Объекты $\overrightarrow{\mathcal{C}}$ -- $\langle h, k \rangle$ \\
+%$1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
 
-*Рисунок из трёх стрелок, показывающий композицию* \\
+%*Рисунок из трёх стрелок, показывающий композицию* \\
 % Здесь невнятное гавно заканчивается
 
 \begin{defn}
@@ -230,3 +230,153 @@ $1_{f\colon a \to b} = \langle 1_a, 1_b \rangle$ \\
   \end{gather*}
   Второе свойство доказывается аналогично
 \end{proof}
+
+\begin{defn}
+  Объекты $a$ и $b$ называются изоморфными ($a \oisom b$), если существует $f: a \isom b$
+\end{defn}
+
+\begin{defn}
+  Селективная категория -- такая категория, в которой $a \oisom b$ влечёт $a = b$.
+\end{defn}
+
+\begin{exm}
+  Категория предпорядка не является селективной категорией, тогда как любая
+  категория частичного порядка является селективной, т.к. добавляется свойство
+  антисимметричности, которое как раз и является переформулировкой свойства
+  селективности.
+\end{exm}
+
+\begin{defn}
+  $0$ -- начальный объект категории $\mathcal{C}$, если из $0$ существует ровно одна
+  стрелка в любой $\mathcal{C}$-объект
+\end{defn}
+
+\begin{stmt}
+  Любые два $0$-объекта изоморфны
+\end{stmt}
+\begin{proof}
+  Пусть $0'$ - тоже $0$. Тогда найдутся такие $f \colon 0 \to 0'$ и $g \colon 0' \to 0$ и
+  единственные $1_0 \colon 0 \to 0$, $1_{0'} \colon 0' \to 0'$. Тогда
+  $g \circ f = 1_0$ и $f \circ g = 1_{0'}$
+\end{proof}
+
+\begin{exm}
+  $\emptyset$ -- начальный объект в $Set$, т.к. пустое множество можно
+  отобразить во все другие единственным образом (ничего не делать можно
+  единственным образом)
+\end{exm}
+
+\begin{defn}
+  $1$ -- конечный объект категории $\mathcal{C}$, если из любого объекта
+  ведёт ровно одна стрелка
+\end{defn}
+
+\begin{exm}
+  В $Set$ конечный объект суть любое одноэлементное множество
+\end{exm}
+
+\begin{task}
+  Стрелка $f \colon 1 \to a$ мноморфна
+\end{task}
+\begin{proof}
+  Тривиально
+\end{proof}
+
+Здесь начинается что-то невнятное. Нужно отредактировать
+
+\begin{defn}
+  $\Sigma$ -- утверждение
+  Заменить $cod \to dom$ на $dom \to cod$. Если было
+  $f \circ g \to g^{op} \circ f^{op}$
+  $\Sigma^{op}$ -- двойственное утверждение
+\end{defn}
+
+\begin{defn}
+  $\Sigma^{op}$ -- двойственная категория к $\mathcal{C}$, если:
+  \begin{enumerate}
+    \item Все объекты $\mathcal{C}^{op}$ -- это $\mathcal{C}$-объекты
+    \item Если $f \colon a \to b$ -- стрелка из $\mathcal{C}$, титт $f^{op}
+      \colon b \to a$ -- стрелка в $\mathcal{C}^{op}$
+    \item $f \circ g$ определена в $\mathcal{C}^{op}$ титт, когда $g^{op} \circ
+      f^{op}$ определена в $\mathcal{C}^{op}$
+      $(f \circ g)^{op} = g^{op} \circ f^{op}$
+  \end{enumerate}
+\end{defn}
+
+\begin{task}
+  $\Sigma$ -- утверждение в $\mathcal{C}$, то $\Sigma^{op}$ -- утверждение в $\mathcal{C}^{op}$
+\end{task}
+
+\begin{task}
+  $1$ -- единственная до изоморфизма
+\end{task}
+
+\subsection{Произведение}
+Пусть $a, b$ -- объекты $\mathcal{C}$. Тогда $a \times b$ -- произведение, если
+найдутся такие $pr_a \colon a \times b \to a$ и $pr_b \colon a \times b \to b$,
+что при любых $f, g$ существует $\langle f, g \rangle$, что:
+$f \colon c \to a$
+$g \colon c \to b$
+
+*Рисуночек с треугольником*
+
+\begin{stmt}
+  В категории $Set$ $A \times B$ -- декартово произведение множеств $A$ и $B$
+\end{stmt}
+\begin{proof}
+  $C, f \colon C \to A, g \colon C \to B$
+  $\langle f, g \rangle (c) = \langle (f(c), g(c)) \rangle$
+\end{proof}
+
+\begin{stmt}
+  $a \times b$ в категории $\mathcal{C}$ единственна до изоморфизма
+\end{stmt}
+\begin{proof}
+  *Картинка с ромбиком*
+  Мы хотим доказать, что существует такая $h \colon a \times b \rightsquigarrow d$
+  Утверждается, что он $h = \langle (pr_a, pr_b) \rangle$, а обратное к нему $h^{-1}
+  = \langle (p, q) \rangle$
+  Из единственности петли понятно, что $h^{-1} \circ h = 1_{a \times b}$ и $h
+  \circ h^{-1} = 1_d$
+  Но почему она единственна? Пускай есть какое-то другое $П(A, B)$ и отображение
+  $П_A \colon П(A, B) \to A$ и $П_B \colon П(A, B) \to B$
+\end{proof}
+
+\begin{task}
+  В категории предпорядка
+  $a \times b$ удовлетворяет свойствам:
+  \begin{enumerate}
+    \item $a \times b <= a$, $a \times b <= b$
+      $a \times b$ -- нижняя грань
+    \item $c <= a$ и $c <= b$ влечёт $c <= a \times b$
+  \end{enumerate}
+  Т.е. предпорядок $c (x)$ -- нижняя полурешётка
+\end{task}
+
+\begin{task}
+  $N$, что такое $(\times)$ в $N$, где оно опр
+\end{task}
+
+\begin{task}
+  $\langle pr_a, pr_b \rangle = 1_{a \times b}$
+\end{task}
+
+\begin{task}
+  $\langle f, g \rangle = \langle k, h \rangle$ влечёт $f = k$ и $g = h$
+\end{task}
+
+\begin{task}
+  $\langle f \circ h, g \circ h \rangle = \langle f, g \rangle \circ h$
+\end{task}
+
+\begin{task}
+  $A \rightsquigarrow A \times \{0\}$ в $Set$
+\end{task}
+
+\begin{task}
+  $1$ - конечный объект, то $A \rightsquigarrow A \times 1$
+\end{task}
+
+\begin{task}
+  Пусть $I \colon a \to 1$, тогда $\langle 1_a, I_a \rangle$ - изо
+\end{task}
