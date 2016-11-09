@@ -150,7 +150,7 @@
   $\Rightarrow$) Предположим $f \colon a \to b$ не инъективно. Тогда найдутся такие $u != v$
   (элемента некоторого множества $a$), что $f(u) = f(v)$. Возьмём такие
   $g_1(x) = u$ и $g_2(x) = v$ (функции, возвращающие всегда одни и те же
-  элементы множества $a$). Тогда $f \circ g_1 = f \circ g_2$. Что противоречит
+  элементы множества $a$). Тогда $f \circ g_1 = f \circ g_2$, что противоречит
   определению мономорфизма $f$.
   $\Leftarrow$) Пусть для некоторого $x$: $g_1(x) \ne g_2(x)$. Тогда $f(g_1(x))
   \ne f(g_2(x))$. А значит $f \circ g_1 \ne f \circ g_2$.
@@ -286,7 +286,7 @@
 
 \begin{defn}
   $\Sigma$ -- утверждение
-  Заменить $cod \to dom$ на $dom \to cod$. Если было
+  Заменить $\cod \to \dom$ на $\dom \to \cod$. Если было
   $f \circ g \to g^{op} \circ f^{op}$
   $\Sigma^{op}$ -- двойственное утверждение
 \end{defn}
@@ -295,9 +295,9 @@
   $\Sigma^{op}$ -- двойственная категория к $\mathcal{C}$, если:
   \begin{enumerate}
     \item Все объекты $\mathcal{C}^{op}$ -- это $\mathcal{C}$-объекты
-    \item Если $f \colon a \to b$ -- стрелка из $\mathcal{C}$, титт $f^{op}
+    \item $f \colon a \to b$ -- стрелка из $\mathcal{C} \iff f^{op}
       \colon b \to a$ -- стрелка в $\mathcal{C}^{op}$
-    \item $f \circ g$ определена в $\mathcal{C}^{op}$ титт, когда $g^{op} \circ
+    \item $f \circ g$ определена в $\mathcal{C}^{op}$ $\iff$ $g^{op} \circ
       f^{op}$ определена в $\mathcal{C}^{op}$
       $(f \circ g)^{op} = g^{op} \circ f^{op}$
   \end{enumerate}
@@ -318,7 +318,16 @@
 $f \colon c \to a$
 $g \colon c \to b$
 
-*Рисуночек с треугольником*
+\begin{figure}[h]
+  \centering
+  \begin{tikzcd}
+    & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow{d}[dashed]{\langle f, g \rangle}& \\
+    a & a\times b \arrow[l, "pr_a"] \arrow[r, "pr_b", swap] & b
+  \end{tikzcd}
+  
+  \caption{Произведение}
+  \label{fig:multiplication}
+\end{figure}
 
 \begin{stmt}
   В категории $Set$ $A \times B$ -- декартово произведение множеств $A$ и $B$
@@ -332,23 +341,32 @@ $g \colon c \to b$
   $a \times b$ в категории $\mathcal{C}$ единственна до изоморфизма
 \end{stmt}
 \begin{proof}
-  *Картинка с ромбиком*
+  \begin{figure}[h]
+    \centering
+    \begin{tikzcd}[column sep=2cm]
+      & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow{d}[dashed]{\langle f, g \rangle}& \\
+    a & a\times b \arrow[l, "pr_a"] \arrow[r, "pr_b", swap] \arrow{d}[dashed]{\langle pr_a, pr_b \rangle}& b \\
+      & d \arrow[ul, "p"]\arrow[ur, "q", swap] &
+    \end{tikzcd}
+    \caption{К доказательству единственности произведения}
+    \label{fig:multiplication-uniqueness}
+  \end{figure}
   Мы хотим доказать, что существует такая $h \colon a \times b \rightsquigarrow d$
   Утверждается, что он $h = \langle (pr_a, pr_b) \rangle$, а обратное к нему $h^{-1}
   = \langle (p, q) \rangle$
   Из единственности петли понятно, что $h^{-1} \circ h = 1_{a \times b}$ и $h
   \circ h^{-1} = 1_d$
-  Но почему она единственна? Пускай есть какое-то другое $П(A, B)$ и отображение
-  $П_A \colon П(A, B) \to A$ и $П_B \colon П(A, B) \to B$
+  Но почему она единственна? Пускай есть какое-то другое $\Pi(A, B)$ и отображение
+  $\Pi_A \colon \Pi(A, B) \to A$ и $\Pi_B \colon \Pi(A, B) \to B$
 \end{proof}
 
 \begin{task}
   В категории предпорядка
   $a \times b$ удовлетворяет свойствам:
   \begin{enumerate}
-    \item $a \times b <= a$, $a \times b <= b$
+  \item $a \times b \sqsubseteq a$, $a \times b \sqsubseteq b$
       $a \times b$ -- нижняя грань
-    \item $c <= a$ и $c <= b$ влечёт $c <= a \times b$
+    \item $c \sqsubseteq a$ и $c \sqsubseteq b$ влечёт $c \sqsubseteq a \times b$
   \end{enumerate}
   Т.е. предпорядок $c (x)$ -- нижняя полурешётка
 \end{task}
@@ -380,3 +398,19 @@ $g \colon c \to b$
 \begin{task}
   Пусть $I \colon a \to 1$, тогда $\langle 1_a, I_a \rangle$ - изо
 \end{task}
+\begin{tikzcd}
+  0 \arrow{r} \arrow[loop left]
+& 0' \arrow{l}
+\end{tikzcd}
+
+
+\begin{tikzcd}
+  & d \arrow[ld, "p", swap] \arrow[rd, "q"] \arrow{dd}[dashed]{S}& \\
+  a &  & b \\
+  & a\times b \arrow[ul, "p"] \arrow[ur, "q", swap] &
+\end{tikzcd}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
