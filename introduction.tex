@@ -282,17 +282,16 @@
   Тривиально
 \end{proof}
 
-Здесь начинается что-то невнятное. Нужно отредактировать
+\section{Двойственность}
 
 \begin{defn}
-  $\Sigma$ -- утверждение
-  Заменить $\cod \to \dom$ на $\dom \to \cod$. Если было
-  $f \circ g \to g^{op} \circ f^{op}$
-  $\Sigma^{op}$ -- двойственное утверждение
+  Пусть $\Sigma$ -- утверждение в терминах языка теории категорий.
+  Тогда двойственное утверждение $\Sigma^{op}$ получается заменой
+  $\cod \to \dom$ на $\dom \to \cod$ и $f \circ g$ на $g^{op} \circ f^{op}$
 \end{defn}
 
 \begin{defn}
-  $\Sigma^{op}$ -- двойственная категория к $\mathcal{C}$, если:
+  $\mathcal{C}^{op}$ -- двойственная категория к $\mathcal{C}$, если:
   \begin{enumerate}
     \item Все объекты $\mathcal{C}^{op}$ -- это $\mathcal{C}$-объекты
     \item $f \colon a \to b$ -- стрелка из $\mathcal{C} \iff f^{op}
@@ -312,16 +311,18 @@
 \end{task}
 
 \subsection{Произведение}
-Пусть $a, b$ -- объекты $\mathcal{C}$. Тогда $a \times b$ -- произведение, если
-найдутся такие $pr_a \colon a \times b \to a$ и $pr_b \colon a \times b \to b$,
-что при любых $f, g$ существует $\langle f, g \rangle$, что:
-$f \colon c \to a$
-$g \colon c \to b$
+\begin{defn}
+  Пусть $a, b$ -- объекты $\mathcal{C}$. Тогда $a \times b$ -- произведение, если
+  найдутся такие $pr_a \colon a \times b \to a$ и $pr_b \colon a \times b \to b$,
+  что при любых $f \colon c \to a$ и $g \colon c \to b$ существует едиственное
+  $\langle f, g \rangle \colon c \to a \times b$, что
+  $pr_a \circ \langle f, g \rangle = f$ и $pr_b \circ \langle f, g \rangle = g$
+\end{defn}
 
 \begin{figure}[h]
   \centering
-  \begin{tikzcd}
-    & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow{d}[dashed]{\langle f, g \rangle}& \\
+  \begin{tikzcd}[row sep=0.5in, column sep=1in]
+    & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow[d, dashed, "\langle f\text{,} g \rangle"]& \\
     a & a\times b \arrow[l, "pr_a"] \arrow[r, "pr_b", swap] & b
   \end{tikzcd}
   
@@ -333,8 +334,8 @@ $g \colon c \to b$
   В категории $Set$ $A \times B$ -- декартово произведение множеств $A$ и $B$
 \end{stmt}
 \begin{proof}
-  $C, f \colon C \to A, g \colon C \to B$
-  $\langle f, g \rangle (c) = \langle (f(c), g(c)) \rangle$
+  Пусть $C$ -- некоторое множество из $Set$ и есть некоторые $f \colon C \to A$ и
+  $g \colon C \to B$. Тогда $\langle f, g \rangle (c) = \langle f(c), g(c) \rangle$
 \end{proof}
 
 \begin{stmt}
@@ -372,7 +373,7 @@ $g \colon c \to b$
 \end{task}
 
 \begin{task}
-  $N$, что такое $(\times)$ в $N$, где оно опр
+  $N$, что такое $(\times)$ в $N$, где оно определено
 \end{task}
 
 \begin{task}
