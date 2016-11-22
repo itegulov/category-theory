@@ -138,31 +138,46 @@
 
 \subsection{Копроизведение (сумма)}
 \begin{defn}
-  Копроизведение -- объект, двойственный произведению
+  Копроизведение -- объект, двойственный произведению. Другими словами
+  пусть $a, b$ -- объекта $\mathcal{C}$. Тогда $a + b$ -- копроизведение, если
+  найдутся такие $in_a \colon a + b \to a$ и $in_b \colon a + b \to b$, что при
+  любых $f \colon c \to a$ и $g \colon c \to b$ существует единственная $[f, g]
+  \colon a + b \to c$, что $[f, g] \circ in_a = f$ и $[f, g] \circ in_b = g$ 
 \end{defn}
 \begin{figure}[h]
   \centering
   \begin{tikzcd}[row sep=0.5in, column sep=1in]
     & w & \\
     a \arrow[ru, "f"] \arrow[r, "\inj_a"] &
-    a + b \arrow[u, dashed, "[f\text{,} g )"] &
+    a + b \arrow[u, dashed, "[f \text{,} g \text{]}"] &
     b\arrow[lu, "g", swap] \arrow[l, "\pr_b", swap]
   \end{tikzcd}
   \caption{Копроизведение}
   \label{fig:coproduct}
 \end{figure}
 \begin{exm}[Копроизведение в $Set$]
-\begin{gather*}
-  A + B = \{\, \langle {a, 0} \rangle \mid a \in A \,\}
-     \cup \{\, \langle {b, 1} \rangle \mid b \in B \,\} \\
-  \inj_A(x) = \langle {x, 0} \rangle \quad
-  \inj_B(x) = \langle {x, 1} \rangle \\
-  f \colon A \to W \quad g \colon W \to B \quad [f, g] \colon A + B \to W \\
-  [f, g](p) = \begin{cases}
-    f(x), & p = \langle {x, 0} \rangle \\
-    g(x), & p = \langle {x, 1} \rangle
-  \end{cases}
-\end{gather*}
+  Копроизведением двух множеств $A$ и $B$ является их дизъюнктивное объединение:
+  \begin{gather*}
+    A + B = \{\, \langle {a, 0} \rangle \mid a \in A \,\}
+      \cup \{\, \langle {b, 1} \rangle \mid b \in B \,\} \\
+    \inj_A(x) = \langle {x, 0} \rangle \quad
+    \inj_B(x) = \langle {x, 1} \rangle \\
+  \end{gather*}
+  Теперь для некоторых $f \colon A \to W$ и $g \colon B \to W$ определим $[f, g]$
+  следующим образом:
+  \begin{gather*}
+    [f, g](p) = \begin{cases}
+      f(x), & p = \langle {x, 0} \rangle \\
+      g(x), & p = \langle {x, 1} \rangle
+    \end{cases}
+  \end{gather*}
+\end{exm}
+\begin{exm}[Копроизведение в категории предпорядка]
+  \leavevmode
+  \begin{enumerate}
+    \item $a \sqsubseteq a + b$, $b \sqsubseteq a + b$
+    \item Если $a \sqsubseteq c$ и $ b \sqsubseteq c$, то $ a + b \sqsubseteq c$
+  \end{enumerate}
 \end{exm}
 
 %%% Local Variables:
