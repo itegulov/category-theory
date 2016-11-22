@@ -38,7 +38,7 @@
 \begin{figure}[h]
   \centering
   \begin{tikzcd}[row sep=0.5in, column sep=1in]
-    & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow[d, dashed, "\langle f\text{,} g \rangle"]& \\
+    & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow[dashed]{d}{\langle f, g \rangle}& \\
     a & a\times b \arrow[l, "\pr_a"] \arrow[r, "\pr_b", swap] & b
   \end{tikzcd}
   
@@ -61,8 +61,8 @@
   \begin{figure}[h]
     \centering
     \begin{tikzcd}[column sep=2cm]
-      & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow{d}[dashed]{\langle f, g \rangle}& \\
-    a & a\times b \arrow[l, "\pr_a"] \arrow[r, "\pr_b", swap] \arrow{d}[dashed]{\langle \pr_a, \pr_b \rangle}& b \\
+      & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow[dashed]{d}{\langle f, g \rangle}& \\
+    a & a\times b \arrow[l, "\pr_a"] \arrow[r, "\pr_b", swap] \arrow[dashed]{d}{\langle \pr_a, \pr_b \rangle}& b \\
       & d \arrow[ul, "p"]\arrow[ur, "q", swap] &
     \end{tikzcd}
     \caption{К доказательству единственности произведения}
@@ -138,7 +138,7 @@
 
 \subsection{Копроизведение (сумма)}
 \begin{defn}
-  Копроизведение -- объект, двойственный произведению. Другими словами
+  Копроизведение -- объект, двойственный произведению. Другими словами,
   пусть $a, b$ -- объекта $\mathcal{C}$. Тогда $a + b$ -- копроизведение, если
   найдутся такие $in_a \colon a + b \to a$ и $in_b \colon a + b \to b$, что при
   любых $f \colon c \to a$ и $g \colon c \to b$ существует единственная $[f, g]
@@ -146,11 +146,11 @@
 \end{defn}
 \begin{figure}[h]
   \centering
-  \begin{tikzcd}[row sep=0.5in, column sep=1in]
+  \begin{tikzcd}[row sep=0.5in, column sep=2cm]
     & w & \\
     a \arrow[ru, "f"] \arrow[r, "\inj_a"] &
-    a + b \arrow[u, dashed, "[f \text{,} g \text{]}"] &
-    b\arrow[lu, "g", swap] \arrow[l, "\pr_b", swap]
+    a + b \arrow[dashed]{u}{[f, g]} &
+    b\arrow[lu, "g", swap] \arrow[l, "\inj_b", swap]
   \end{tikzcd}
   \caption{Копроизведение}
   \label{fig:coproduct}
@@ -191,30 +191,61 @@
       то $i \circ k = h$
   \end{enumerate}
 \end{defn}
+\begin{figure}[h]
+  \centering
+  \begin{tikzcd}[row sep = 2mm]
+    c \arrow[dr, "h"]      &                  &   \\
+    e \arrow[r, "i", swap] & a \arrow[r, "f", shift left]
+                               \arrow[r, "g", shift right, swap]& b
+  \end{tikzcd}
+  \caption{Уравнитель}
+  \label{fig:equaliser}
+\end{figure}
 
 \begin{thm}
   Уравнитель -- мономорфизм
 \end{thm}
 \begin{proof}
-  Пусть $i \circ p = i \circ q$, но при этом $p \neq q$. Рассмотрим $f \circ (i
-  \circ p) = (f \circ i) \circ p = (g \circ i) \circ p = g \circ (i \circ p)$.
-  Получилось, что $f \circ (i \circ p) = g \circ (i \circ p)$. Тогда по определнию
-  уравнителя есть единственное такое $k$, что $i \circ k = i \circ p$. Значит $k
-  = p$ и аналогично доказывается $k = q$.
+  Пусть $i \circ p = i \circ q$, но при этом $p \neq q$.
+  Рассмотрим $f \circ (i \circ p) = (f \circ i) \circ p = (g \circ i) \circ p = g \circ (i \circ p)$.
+  Получилось, что $f \circ (i \circ p) = g \circ (i \circ p)$.
+  Тогда по определению уравнителя есть единственное такое $k$, что $i \circ k = i \circ p$.
+  Значит, $k = p$ и аналогично доказывается $k = q$.
 \end{proof}
+\begin{figure}[h]
+  \centering
+  \begin{tikzcd}[row sep = 1cm]
+    e \arrow[rr, "i"] & & a \arrow[r, "f", shift left] \arrow[r, "g", swap, shift right]& b \\
+           & c \arrow[lu, "p", shift left] \arrow[lu, "q", shift right, swap]
+                                           \arrow[ru, "i \circ p", swap] & &
+  \end{tikzcd}
+  \caption{К доказательству мономорфности}
+  \label{fig:equaliser-monomorphism}
+\end{figure}
 
 \begin{thm}
   Эпиморфный уравнитель -- изоморфизм
 \end{thm}
 \begin{proof}
-  По условию если $f \circ i = g \circ i$, то $f = g$. Тогда представим, что $c
-  = a$ и $h = 1_a$. Получили $f \circ 1_a = g \circ 1_a = f$, а значит
-  по определнию уравнителя есть единственное такое $k$, что $i \circ k = 1_a$.
-  Тогда $i \circ k \circ i = 1_a \circ i = i = i \circ 1_b$. Получается, что $i
-  \circ k \circ i = i \circ 1_b$ и по определению мономорфизма (а уравнитель это
-  мономорфизм по прошлой теореме) получаем $k \circ i = 1_b$. Таким образом $k$
-  -- обратный элемент для $i$. Поэтому $i$ -- изоморфизм.
+  По условию, если $f \circ i = g \circ i$, то $f = g$.
+  Тогда представим, что $c = a$ и $h = 1_a$.
+  Получили $f \circ 1_a = g \circ 1_a = f$, а значит,
+  по определению уравнителя есть единственное такое $k$, что $i \circ k = 1_a$.
+  Тогда $i \circ k \circ i = 1_a \circ i = i = i \circ 1_b$.
+  Получается, что $i \circ k \circ i = i \circ 1_b$ и по определению мономорфизма
+  (а уравнитель -- это мономорфизм по прошлой теореме) получаем $k \circ i = 1_b$.
+  Таким образом, $k$ -- обратный элемент для $i$.
+  Поэтому $i$ -- изоморфизм.
 \end{proof}
+\begin{figure}[h]
+  \centering
+  \begin{tikzcd}[row sep = 1cm]
+    e \arrow[rr, "i"] & & a \arrow[dashed]{r}{f, g}& b \\
+            & c \arrow[lu, dashed, "a"] \arrow[ru, "1_a", swap] & &
+  \end{tikzcd}
+  \caption{К доказательству изоморфности эпиморфного уравнителя}
+  \label{fig:equaliser-isomorphism}
+\end{figure}
 
 %%% Local Variables:
 %%% mode: latex
