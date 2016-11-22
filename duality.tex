@@ -180,6 +180,42 @@
   \end{enumerate}
 \end{exm}
 
+\subsection{Уравнители}
+\begin{defn}
+  Пусть $f, g \colon a \rightrightarrows b$ -- пара морфизмов, тогда $i \colon e \to
+  a$ называется уравнителем, если:
+  \begin{enumerate}
+    \item $f \circ i = g \circ i$
+    \item Для любого $h \colon c \to a$ найдётся единственный морфизм
+      $k \colon c \to e$ такой, что если $f \circ h = g \circ h$,
+      то $i \circ k = h$
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}
+  Уравнитель -- мономорфизм
+\end{thm}
+\begin{proof}
+  Пусть $i \circ p = i \circ q$, но при этом $p \neq q$. Рассмотрим $f \circ (i
+  \circ p) = (f \circ i) \circ p = (g \circ i) \circ p = g \circ (i \circ p)$.
+  Получилось, что $f \circ (i \circ p) = g \circ (i \circ p)$. Тогда по определнию
+  уравнителя есть единственное такое $k$, что $i \circ k = i \circ p$. Значит $k
+  = p$ и аналогично доказывается $k = q$.
+\end{proof}
+
+\begin{thm}
+  Эпиморфный уравнитель -- изоморфизм
+\end{thm}
+\begin{proof}
+  По условию если $f \circ i = g \circ i$, то $f = g$. Тогда представим, что $c
+  = a$ и $h = 1_a$. Получили $f \circ 1_a = g \circ 1_a = f$, а значит
+  по определнию уравнителя есть единственное такое $k$, что $i \circ k = 1_a$.
+  Тогда $i \circ k \circ i = 1_a \circ i = i = i \circ 1_b$. Получается, что $i
+  \circ k \circ i = i \circ 1_b$ и по определению мономорфизма (а уравнитель это
+  мономорфизм по прошлой теореме) получаем $k \circ i = 1_b$. Таким образом $k$
+  -- обратный элемент для $i$. Поэтому $i$ -- изоморфизм.
+\end{proof}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
