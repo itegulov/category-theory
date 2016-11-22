@@ -1,12 +1,12 @@
-\section{Ввведение}
+\section{Введение}
 \subsection{Основные определения и свойства}
 \begin{defn}
   Категорией называется такое
-  $\mathcal{C} = \langle \mathcal{O}, hom, 1, \circ \rangle$, что:
+  $\mathcal{C} = \langle \mathcal{O}, \hom, 1, \circ \rangle$, что:
   \begin{enumerate}
   \item Есть множество объектов $\mathcal{O}$: $(a, b, \ldots)$
   \item Для каждой пары объектов $(a, b)$ из $\mathcal{C}$, существует множество
-    $hom(a, b)$, элементы которого называются морфизмами (стрелками) из $a$ в $b$:
+    $\hom(a, b)$, элементы которого называются морфизмами (стрелками) из $a$ в $b$:
     $(f \colon a \to b,\ g \colon b \to c, \ldots)$
   \item Для каждого объекта $a$ из $\mathcal{C}$ существует морфизм
     $1_a \colon a \to a$
@@ -21,7 +21,7 @@
   \end{itemize}
 \end{defn}
 
-\begin{figure}[b]
+\begin{figure}
   \centering
   \begin{tikzcd}[column sep=1in, row sep=1in]
     a \arrow[r, "f"] \arrow[dr, "g\circ f" labrd, pos=0.3, crossing over]
@@ -46,7 +46,7 @@
       $1_a$ -- тождественное отображение \\
       $\circ$ -- обычная композиция отображений
     \item Категория $1$ \\
-      $1_a\colon a \to a$ (нарисовать петлю)
+      $1_a\colon a \to a$
     \item Категория $2$ \\
       две петли и $f\colon a \to b$
     \item Категория предпорядка \\
@@ -59,12 +59,12 @@
     \item Категория моноид \\
       Пусть есть моноид $M = \langle A, *, e \rangle$. Тогда в качестве
       единственного объекта возьмём $A$ ($\mathcal{O} = \{ A \}$),
-      стрелками будут все элементы $A$ ($hom(A, A) = A$), $1_A = e$, а композиция
+      стрелками будут все элементы $A$ ($\hom(A, A) = A$), $1_A = e$, а композиция
       стрелок будет эквивалентна $a * b$.
   \end{enumerate}
 \end{exm}
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \begin{subfigure}{.33\textwidth}
   \centering
@@ -82,7 +82,7 @@
   \end{tikzcd}
   \caption{Категория 2}
   \label{fig:category-2}
-\end{subfigure}
+\end{subfigure}%
 \begin{subfigure}{.33\textwidth}
   \centering
   \begin{tikzcd}[column sep=1in]
@@ -281,135 +281,6 @@
 \begin{proof}
   Тривиально
 \end{proof}
-
-\section{Двойственность}
-
-\begin{defn}
-  Пусть $\Sigma$ -- утверждение в терминах языка теории категорий.
-  Тогда двойственное утверждение $\Sigma^{op}$ получается заменой
-  $\cod \to \dom$ на $\dom \to \cod$ и $f \circ g$ на $g^{op} \circ f^{op}$
-\end{defn}
-
-\begin{defn}
-  $\mathcal{C}^{op}$ -- двойственная категория к $\mathcal{C}$, если:
-  \begin{enumerate}
-    \item Все объекты $\mathcal{C}^{op}$ -- это $\mathcal{C}$-объекты
-    \item $f \colon a \to b$ -- стрелка из $\mathcal{C} \iff f^{op}
-      \colon b \to a$ -- стрелка в $\mathcal{C}^{op}$
-    \item $f \circ g$ определена в $\mathcal{C}^{op}$ $\iff$ $g^{op} \circ
-      f^{op}$ определена в $\mathcal{C}^{op}$
-      $(f \circ g)^{op} = g^{op} \circ f^{op}$
-  \end{enumerate}
-\end{defn}
-
-\begin{task}
-  $\Sigma$ -- утверждение в $\mathcal{C}$, то $\Sigma^{op}$ -- утверждение в $\mathcal{C}^{op}$
-\end{task}
-
-\begin{task}
-  $1$ -- единственная до изоморфизма
-\end{task}
-
-\subsection{Произведение}
-\begin{defn}
-  Пусть $a, b$ -- объекты $\mathcal{C}$. Тогда $a \times b$ -- произведение, если
-  найдутся такие $pr_a \colon a \times b \to a$ и $pr_b \colon a \times b \to b$,
-  что при любых $f \colon c \to a$ и $g \colon c \to b$ существует едиственное
-  $\langle f, g \rangle \colon c \to a \times b$, что
-  $pr_a \circ \langle f, g \rangle = f$ и $pr_b \circ \langle f, g \rangle = g$
-\end{defn}
-
-\begin{figure}[h]
-  \centering
-  \begin{tikzcd}[row sep=0.5in, column sep=1in]
-    & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow[d, dashed, "\langle f\text{,} g \rangle"]& \\
-    a & a\times b \arrow[l, "pr_a"] \arrow[r, "pr_b", swap] & b
-  \end{tikzcd}
-  
-  \caption{Произведение}
-  \label{fig:multiplication}
-\end{figure}
-
-\begin{stmt}
-  В категории $Set$ $A \times B$ -- декартово произведение множеств $A$ и $B$
-\end{stmt}
-\begin{proof}
-  Пусть $C$ -- некоторое множество из $Set$ и есть некоторые $f \colon C \to A$ и
-  $g \colon C \to B$. Тогда $\langle f, g \rangle (c) = \langle f(c), g(c) \rangle$
-\end{proof}
-
-\begin{stmt}
-  $a \times b$ в категории $\mathcal{C}$ единственна до изоморфизма
-\end{stmt}
-\begin{proof}
-  \begin{figure}[h]
-    \centering
-    \begin{tikzcd}[column sep=2cm]
-      & c \arrow[ld, "f", swap] \arrow[rd, "g"] \arrow{d}[dashed]{\langle f, g \rangle}& \\
-    a & a\times b \arrow[l, "pr_a"] \arrow[r, "pr_b", swap] \arrow{d}[dashed]{\langle pr_a, pr_b \rangle}& b \\
-      & d \arrow[ul, "p"]\arrow[ur, "q", swap] &
-    \end{tikzcd}
-    \caption{К доказательству единственности произведения}
-    \label{fig:multiplication-uniqueness}
-  \end{figure}
-  Мы хотим доказать, что существует такая $h \colon a \times b \rightsquigarrow d$
-  Утверждается, что он $h = \langle (pr_a, pr_b) \rangle$, а обратное к нему $h^{-1}
-  = \langle (p, q) \rangle$
-  Из единственности петли понятно, что $h^{-1} \circ h = 1_{a \times b}$ и $h
-  \circ h^{-1} = 1_d$
-  Но почему она единственна? Пускай есть какое-то другое $\Pi(A, B)$ и отображение
-  $\Pi_A \colon \Pi(A, B) \to A$ и $\Pi_B \colon \Pi(A, B) \to B$
-\end{proof}
-
-\begin{task}
-  В категории предпорядка
-  $a \times b$ удовлетворяет свойствам:
-  \begin{enumerate}
-  \item $a \times b \sqsubseteq a$, $a \times b \sqsubseteq b$
-      $a \times b$ -- нижняя грань
-    \item $c \sqsubseteq a$ и $c \sqsubseteq b$ влечёт $c \sqsubseteq a \times b$
-  \end{enumerate}
-  Т.е. предпорядок $c (x)$ -- нижняя полурешётка
-\end{task}
-
-\begin{task}
-  $N$, что такое $(\times)$ в $N$, где оно определено
-\end{task}
-
-\begin{task}
-  $\langle pr_a, pr_b \rangle = 1_{a \times b}$
-\end{task}
-
-\begin{task}
-  $\langle f, g \rangle = \langle k, h \rangle$ влечёт $f = k$ и $g = h$
-\end{task}
-
-\begin{task}
-  $\langle f \circ h, g \circ h \rangle = \langle f, g \rangle \circ h$
-\end{task}
-
-\begin{task}
-  $A \rightsquigarrow A \times \{0\}$ в $Set$
-\end{task}
-
-\begin{task}
-  $1$ - конечный объект, то $A \rightsquigarrow A \times 1$
-\end{task}
-
-\begin{task}
-  Пусть $I \colon a \to 1$, тогда $\langle 1_a, I_a \rangle$ - изо
-\end{task}
-\begin{tikzcd}
-  0 \arrow{r} \arrow[loop left]
-& 0' \arrow{l}
-\end{tikzcd}
-
-
-\begin{tikzcd}
-  & d \arrow[ld, "p", swap] \arrow[rd, "q"] \arrow{dd}[dashed]{S}& \\
-  a &  & b \\
-  & a\times b \arrow[ul, "p"] \arrow[ur, "q", swap] &
-\end{tikzcd}
 
 %%% Local Variables:
 %%% mode: latex
