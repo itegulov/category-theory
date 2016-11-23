@@ -247,6 +247,38 @@
   \label{fig:equaliser-isomorphism}
 \end{figure}
 
+\section{Конус}
+Пусть $D$ -- диаграмма $\{\,d_i \text{ -- объекты}, g_i \text{-- стрелки}\}$
+\begin{defn}[Конус для диаграммы D]
+  Конус -- это:
+  \begin{enumerate}
+  \item C-объект
+  \item Набор стрелок $\{f_i\} \quad f_i \colon c \to d_i$
+  \end{enumerate}
+  такие, что для каждого $d_i$ и $d_j$ таких, что есть $g\colon d_i \to d_j$
+  найдутся $f_i$ и $f_j$, что диаграмма \ref{fig:cone} комутативна, и на ней
+  $f_j = g \circ f_i$
+\end{defn}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzcd}[row sep = .5in]
+    d_i \arrow[rr, "g"] & & d_j \\
+    & c \arrow[lu, "f_i"] \arrow[ru, "f_j", swap] &
+  \end{tikzcd}
+  \caption{Конус}
+  \label{fig:cone}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzcd}[row sep = .5in]
+    & d_i  & \\
+    x \arrow[ru, "f'_i"]\arrow[rr, dashed] & & c\arrow[lu, "f_i", swap]
+  \end{tikzcd}
+  \caption{Предел}
+  \label{fig:limit}
+\end{figure}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
